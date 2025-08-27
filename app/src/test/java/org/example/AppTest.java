@@ -6,9 +6,35 @@ package org.example;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+public class TransversalTest {
+    @Test void validationNullEsEmailValido(){
+        EmailValidator validator = new EmailValidator(){};
+        boolean nullValidation = validator.esEmailValido(null);
+        Assertions.assertFalse(nullValidation);
     }
+    @Test void trueEmailValidation(){
+        EmailValidator validator = new EmailValidator(){};
+        String email = "holamundo@yopmail.com";
+        boolean correctEmail = validator.esEmailValido(email);
+        Assertions.assertTrue(correctEmail);
+    }
+    @Test void validationNumberEsNumero(){
+        EmailValidator validator = new EmailValidator(){};
+        String number = "123456";
+        boolean numberValidation = validator.esNumero(number);
+        Assertions.assertTrue(numberValidation); 
+    }
+    @Test void validationNumberWithSpacesEsNumero(){
+        EmailValidator validator = new EmailValidator(){};
+        String numberWithSpaces = "12 3456";
+        boolean result = validator.esNumero(numberWithSpaces);
+        Assertions.assertFalse(result);
+    }
+    @Test void validationNumberWithLettersEsNumero(){
+        EmailValidator validator = new EmailValidator(){};
+        String numberWithLetters = "123a456";
+        boolean result = validator.esNumero(numberWithLetters);
+        Assertions.assertFalse(result);
+    }
+    
 }
